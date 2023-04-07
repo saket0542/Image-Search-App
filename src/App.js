@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import './App.css'
 import styled from "styled-components";
 import ImageComponent from "./components/ImageComponent";
 import FormGroup from '@mui/material/FormGroup';
@@ -69,6 +70,7 @@ const Placeholder = styled.img`
   opacity: 50%;
 `;
 
+
 function App() {
   const [searchQuery, updateSearchQuery] = useState("");
   const [imageList, updateImageList] = useState([]);
@@ -81,7 +83,7 @@ function App() {
   });
   const fetchData=async(searchString)=>{
       const response=await axios.get(
-      `https://api.unsplash.com/search/photos?page=1&query=${searchString}&client_id=xQ-DWfk84120yW4mpt2O-grHnWomaD5GvCvdHtLBwts`
+      `https://api.unsplash.com/search/photos?page=1&query=${searchString}&client_id=${process.env.REACT_APP_ACCESS_KEY}`
       )
       updateImageList(response.data.results);
      console.log(response.data.results)
@@ -109,7 +111,7 @@ function App() {
             onChange={onTextChange}
           />
         </SearchBox>
-        <FormGroup>
+        <FormGroup className="dark">
       <FormControlLabel control={<Switch onClick={(e)=>setMode(mode==="light"?"dark":"light")}  {...label} defaultUnChecked />} label="DarkMode" />
     </FormGroup>
       </Header>
@@ -118,8 +120,7 @@ function App() {
         imageList?.length?(imageList.map((img)=>
           <ImageComponent
             image={img}
-            key={img.id}
-            id={img.id}
+            key={img.id} 
           />
         )):(
           <Placeholder src="https://play-lh.googleusercontent.com/NuJSG_bIoce6kvvtJnULAf34_Rsa1j-HDEt4MWTOrL_3XA51QH9qOQR5UmAYxPI96jA" />

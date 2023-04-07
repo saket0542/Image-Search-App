@@ -1,3 +1,6 @@
-body{
-   background-color: black;
-}
+
+@media screen and (max-width: 600px) {
+   .dark {
+     display: none;
+   }
+ }

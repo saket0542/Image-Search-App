@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import DownloadIcon from '@mui/icons-material/Download';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Button from '@mui/material/Button';
 const Image = styled.img`
   width: 100%;
-  height: 60vh;
+  height: 80vh;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 `;
@@ -16,8 +22,16 @@ const ModalContainer = styled(Box)`
   border-radius: 8px;
   padding: 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   align-items: center;
+`;
+const NameandIcon=styled.div`
+display:flex;
+margin-top:0.5rem;
+flex-direction:row;
+justify-content:center;
+align-items:center;
+gap:2px;
 `;
 
 const ProfileImage = styled.img`
@@ -49,23 +63,22 @@ const StyledModal = styled(Modal)`
 `;
 
 export const ImageInfoCompo = (props) => {
-  let [open, setOpen] = useState(false);
+  let [open, setOpen] = useState(props.isopen);
   const [image, setImage] = useState({});
   const [user, setUser] = useState({});
-  const ACCESS_KEY = 'xQ-DWfk84120yW4mpt2O-grHnWomaD5GvCvdHtLBwts';
+  const [liked,setliked]=useState(false);
   const PHOTO_ID = props.id;
-  open=props.isopen
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(`https://api.unsplash.com/photos/${PHOTO_ID}`, {
           headers: {
-            Authorization: `Client-ID ${ACCESS_KEY}`,
+            Authorization: `Client-ID ${process.env.REACT_APP_ACCESS_KEY}`,
           },
         });
         const json = await response.json();
         setImage(json);
-        setUser(json.user);
+        setUser(json);
       } catch (error) {
         console.log(error);
       }
@@ -82,20 +95,21 @@ export const ImageInfoCompo = (props) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    height: 'auto',
+    width: 700,
+    height: 700,
     maxWidth: '90%',
     maxHeight: '90%',
     bgcolor: 'background.paper',
     boxShadow: 24,
-    p: 4,
+    backgroundColor: 'white',
   };
-
+const clickhandler=()=>{
+setliked(!liked);
+}
   return (
     <StyledModal
       open={open}
       onClose={handleClose}
-      // onBackdropClick={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -103,12 +117,16 @@ export const ImageInfoCompo = (props) => {
         {image.urls ? (
           <>
             <Image src={image.urls.regular} />
-            <ProfileInfo>
-              <ProfileImage src={user.profile_image.small} />
-              <Typography variant="h6">{user.name}</Typography>
-            </ProfileInfo>
-            <InstagramHandle variant="subtitle1">@{user.instagram_username}</InstagramHandle>
-            <Likes variant="subtitle1">{image.likes} likes</Likes>
+            <Box sx={{display:'flex', flexDirection:'row', marginTop:2,marginBottom:1,gap:1,width:'100%'}}>
+  <Box sx={{display:'flex',flexGrow:1}}>
+   <Button onClick={clickhandler} variant="outlined" startIcon= {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}>Like</Button>
+    <Button variant="outlined" startIcon={<ShareIcon />}>Share</Button>
+    <Button variant="outlined" startIcon={<PowerSettingsNewIcon />}>Info</Button>
+  </Box>
+  <Button variant="contained" color="success"startIcon={<DownloadIcon />}>
+  Download
+</Button>
+</Box>
           </>
         ) : (
           <Typography>Loading...</Typography>
