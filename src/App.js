@@ -111,9 +111,10 @@ function App() {
             onChange={onTextChange}
           />
         </SearchBox>
-        <FormGroup className="dark">
-      <FormControlLabel control={<Switch onClick={(e)=>setMode(mode==="light"?"dark":"light")}  {...label} defaultUnChecked />} label="DarkMode" />
-    </FormGroup>
+    <FormGroup className={mode}>
+  <FormControlLabel control={<Switch onChange={(e)=>setMode(mode==="light"?"dark":"light")}  {...label} defaultUnChecked />} label="DarkMode" />
+</FormGroup>
+
       </Header>
       <ImageListContainer>
       {
