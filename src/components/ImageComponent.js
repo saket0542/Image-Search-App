@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import IconButton from '@mui/material/IconButton';
 import { ImageInfoCompo } from "./ImageInfoCompo";
 import Avatar from '@mui/material/Avatar';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Icon, Typography } from "@mui/material";
+import { Icon, Typography, useTheme } from "@mui/material";
 import InstagramIcon from '@mui/icons-material/Instagram';
 const ImageContainer = styled.div`
   display: flex;
@@ -53,6 +52,8 @@ const ImageComponent = (props) => {
   const clickhandler=()=>{
     setmodal(!modal)
   }
+  const theme = useTheme();
+  const usernameColor = theme.palette.mode === 'dark' ? 'textPrimary' : 'textSecondary';
   return (
     <ImageContainer>
       <CoverImage src={urls.regular} alt={description} onClick={clickhandler } />
@@ -66,11 +67,11 @@ const ImageComponent = (props) => {
       </NameandIcon>
       </InfoColumn>
       <Des>
-      <Typography>
+      <Typography color={usernameColor}>
       <Icon sx={{ display: 'inline-block', verticalAlign: 'middle',color:'#E75480' }} component={InstagramIcon} />
       :{user.instagram_username}
     </Typography>
-    <Typography>
+    <Typography color={usernameColor}>
       <Icon sx={{ display: 'inline-block', verticalAlign: 'middle', color:'#728FCE'}} component={ThumbUpIcon} />
       :{likes}
     </Typography>

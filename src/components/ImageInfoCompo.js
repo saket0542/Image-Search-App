@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -18,42 +17,11 @@ const Image = styled.img`
 `;
 
 const ModalContainer = styled(Box)`
-  background-color: white;
   border-radius: 8px;
-  padding: 16px;
+  padding: 10px;
   display: flex;
   flex-direction:column;
   align-items: center;
-`;
-const NameandIcon=styled.div`
-display:flex;
-margin-top:0.5rem;
-flex-direction:row;
-justify-content:center;
-align-items:center;
-gap:2px;
-`;
-
-const ProfileImage = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  margin-right: 16px;
-`;
-
-const ProfileInfo = styled(Box)`
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-`;
-
-const InstagramHandle = styled(Typography)`
-  color: #666;
-  margin-top: 8px;
-`;
-
-const Likes = styled(Typography)`
-  margin-top: 16px;
 `;
 
 const StyledModal = styled(Modal)`

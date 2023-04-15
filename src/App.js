@@ -6,6 +6,7 @@ import ImageComponent from "./components/ImageComponent";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const Container = styled.div`
   display: flex;
@@ -97,9 +98,10 @@ function App() {
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
   return (
     <ThemeProvider theme={darkTheme}>
+    <CssBaseline/>
     <Container bgcolor={"background.default"} color={"text.primary"}>
-      <Header>
-        <AppName>
+      <Header className="Header">
+        <AppName className="dark">
           <LogoImage src="https://thumbs.dreamstime.com/z/creative-colorful-camera-logo-design-symbol-vector-illustration-150574893.jpg" />
           Image Search Gallery
         </AppName>
@@ -111,10 +113,9 @@ function App() {
             onChange={onTextChange}
           />
         </SearchBox>
-    <FormGroup className={mode}>
+    <FormGroup>
   <FormControlLabel control={<Switch onChange={(e)=>setMode(mode==="light"?"dark":"light")}  {...label} defaultUnChecked />} label="DarkMode" />
 </FormGroup>
-
       </Header>
       <ImageListContainer>
       {
