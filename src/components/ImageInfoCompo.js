@@ -69,7 +69,6 @@ export const ImageInfoCompo = (props) => {
     maxHeight: '90%',
     bgcolor: 'background.paper',
     boxShadow: 24,
-    backgroundColor: 'white',
   };
 const clickhandler=()=>{
 setliked(!liked);
