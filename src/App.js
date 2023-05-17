@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+// Container is the main container of our code.
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,6 +18,7 @@ const AppName = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+// App Name is used to hold the Logo and Name of the App
 const Header = styled.div`
   background-color: black;
   color: white;
@@ -62,7 +64,7 @@ const ImageListContainer = styled.div`
   flex-wrap: wrap;
   padding: 30px;
   gap: 25px;
-  justify-content: space-evenly;;
+  justify-content: space-evenly;
 `;
 const Placeholder = styled.img`
   width: 120px;
@@ -92,15 +94,15 @@ function App() {
   const onTextChange=(e)=>{
       clearTimeout(timeoutId);
       updateSearchQuery(e.target.value);
-      const timeout=setTimeout(()=>fetchData(e.target.value),500);
+      const timeout=setTimeout(()=>fetchData(e.target.value),200);
       updateTimeoutId(timeout);
   }
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
   return (
     <ThemeProvider theme={darkTheme}>
     <CssBaseline/>
-    <Container bgcolor={"background.default"} color={"text.primary"}>
-      <Header className="Header">
+    <Container>
+      <Header>
         <AppName className="dark">
           <LogoImage src="https://thumbs.dreamstime.com/z/creative-colorful-camera-logo-design-symbol-vector-illustration-150574893.jpg" />
           Image Search Gallery
